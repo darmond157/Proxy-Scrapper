@@ -1,9 +1,6 @@
 {
   "name": "proxy-scrapper",
   "packageManager": "yarn@3.6.1",
-  "scripts": {
-    "dev": "node server.js"
-  },
   "dependencies": {
     "@fastify/mongodb": "^6.2.0",
     "@grpc/grpc-js": "^1.8.18",
