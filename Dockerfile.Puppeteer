@@ -11,4 +11,4 @@ RUN apt-get update && apt-get install gnupg wget -y && \
 RUN yarn
 COPY . .
 EXPOSE 3000
-ENTRYPOINT ["node" ,"server.js"]
+ENTRYPOINT ["node" ,"app.js"]

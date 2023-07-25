@@ -5,4 +5,4 @@ COPY yarn.lock ./
 RUN yarn
 COPY . .
 EXPOSE 3000
-ENTRYPOINT ["node" ,"server.js"]
+ENTRYPOINT ["node" ,"app.js"]
