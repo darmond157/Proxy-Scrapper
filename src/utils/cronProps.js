@@ -6,9 +6,11 @@ function cronProps (fastify) {
     jobs: [
       {
         cronTime: process.env.CRON_TIME,
-        onTick: async () => {
-          await axiosReqs()
-          insertToMongo(fastify)
+        onTick: () => {
+          let allPromises = axiosReqs()
+          Promise.all(allPromises).then(() => {
+            insertToMongo(fastify)
+          })
         }
       }
     ]
