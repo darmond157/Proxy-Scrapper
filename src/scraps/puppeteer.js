@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer')
 const urls = require('../data/puppeteerUrls')
+const { formatUsSslProxy, formatSocksProxy } = require('../utils/formatters.js')
 const browser = await puppeteer.launch({
   headless: 'new',
   args: ['--no-sandbox']

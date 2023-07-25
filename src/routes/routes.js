@@ -1,4 +1,4 @@
-function routes (fastify) {
+function initRoutes (fastify) {
   fastify.get('/allProxies', (request, reply) => {
     fastify.mongo.db
       .collection('proxies')
@@ -9,4 +9,4 @@ function routes (fastify) {
   })
 }
 
-module.exports = routes
+module.exports = initRoutes

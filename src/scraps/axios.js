@@ -1,7 +1,8 @@
 const axios = require('axios')
 const urls = require('../data/axiosUrls')
+const { formatProxy, splitProxy } = require('../utils/formatters.js')
 
-function axiosReqs () {
+async function axiosReqs () {
   axios
     .get('https://sunny9577.github.io/proxy-scraper/proxies.json')
     .then(res => {
