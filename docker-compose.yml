@@ -2,7 +2,7 @@ version: "3.2"
 services:
   mongodb:
     image: mongo:latest
-    container_name: "mongo3"
+    container_name: "mongo"
     networks:
       - proxyScrapper_network
   proxy:

@@ -1,62 +1,11 @@
 syntax = "proto3";
 
-import "google/protobuf/timestamp.proto";
-import "google/protobuf/struct.proto";
-
-option go_package = "arcaptcha/iprep/iprepProto";
-
-package iprep;
+package test;
 
 service rep {
-  rpc SetReputation(SetRepReq) returns (ReputationsList) {}
-  rpc SetGbot(SetRepReq) returns (ReputationsList) {}
-  rpc SetBlocked(SetRepReq) returns (ReputationsList) {}
-  rpc GetReputation(GetAddRepReq) returns (Reputations) {}
-  rpc GetAddReputation(GetAddRepReq) returns (Reputations) {}
-  rpc UpdateReputation(UpdateRepReq) returns (Reputations) {}
-  rpc UpdateReputation2(UpdateRepReq2) returns (Reputations) {}
+  rpc Test(X) returns (X) {}
 }
 
-message Reputation {
-  string object = 1;
-  string type = 2;
-  int32 reputation = 3;
-  google.protobuf.Timestamp lastupdated = 4;
-  bool gbot = 5;
-  bool blocked = 6;
+message X {
+string Y = 1;
 }
-
-message Reputations {
-  map<string, Reputation> reputations = 1;
-}
-
-message ReputationsList {
-  repeated Reputation reputations = 1;
-}
-
-message SetRepReq {
-  repeated Reputation reputations = 1;
-}
-
-message GetAddRepReq {
-  map<string, string> params = 1;
-}
-
-message UpdateReputationModel {
-  string object = 1;
-  string type = 2;
-  int32 amount = 3;
-}
-
-message UpdateRepReq {
-  map<string, string> params = 1;
-  int32 amount = 2;
-  google.protobuf.Struct data = 3;
-}
-
-message UpdateRepReq2 {
-  string cid = 1;
-  string action = 2;
-  repeated UpdateReputationModel reps = 3;
-}
-

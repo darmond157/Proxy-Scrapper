@@ -33,23 +33,7 @@ function splitProxy (array, type,proxies) {
   })
 }
 
-function formatSocksProxy (array) {
-  array.forEach(element => {
-    let el = element.split('\t')
-    addToIpBlacklist(client, el[0])
-    proxies.set(el[0], {
-      _id: el[0],
-      ip: el[0],
-      port: el[1],
-      country: el[3],
-      anonymity: el[5],
-      type: el[4],
-      code: el[2]
-    })
-  })
-}
-
-function formatUsSslProxy (array) {
+function formatPuppProxy (array) {
   array.forEach(element => {
     let el = element.split('\t')
     addToIpBlacklist(client, el[0])
@@ -68,6 +52,5 @@ function formatUsSslProxy (array) {
 module.exports = {
   formatProxy,
   splitProxy,
-  formatSocksProxy,
-  formatUsSslProxy
+  formatPuppProxy,
 }
