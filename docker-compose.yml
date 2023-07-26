@@ -2,24 +2,26 @@ version: "3.2"
 services:
   mongodb:
     image: mongo:latest
-    container_name: 'mongo2'
+    container_name: "mongo3"
     networks:
       - proxyScrapper_network
   proxy:
     build: .
-    container_name: 'proxy_scrapper'
+    container_name: "proxy_scrapper"
     ports:
-    - 3000:3000
+      - 3000:3000
     networks:
       - proxyScrapper_network
     environment:
-    - MONGODB_URL=mongodb://mongodb:27017/proxies
-    - LOGGER=true
-    - CRON_TIME=* * * * *
-    - PORT=3000
+      - MONGODB_URL=mongodb://mongodb:27017/proxies
+      - LOGGER=true
+      - CRON_TIME=* * * * *
+      - PORT=3000
+      - GRPC_PORT=localhost:9091
+      - HOST=0.0.0.0
     depends_on:
-    - mongodb
-  
+      - mongodb
+
 networks:
   proxyScrapper_network:
     driver: bridge

@@ -4,12 +4,12 @@ const { formatProxy, splitProxy } = require('../utils/formatters.js')
 
 let allPromises = []
 
-function axiosReqs () {
+function axiosReqs (proxies) {
   allPromises.push(
     axios
       .get('https://sunny9577.github.io/proxy-scraper/proxies.json')
       .then(res => {
-        formatProxy(res.data)
+        formatProxy(res.data,proxies)
       })
       .catch(e => {
         console.log(e)
@@ -21,7 +21,7 @@ function axiosReqs () {
       axios
         .get(el.url)
         .then(res => {
-          splitProxy(res.data.split('\n'), el.type)
+          splitProxy(res.data.split('\n'), el.type,proxies)
         })
         .catch(e => {
           console.log(e)

@@ -1,5 +1,6 @@
 const axiosReqs = require('../scraps/axios.js')
-const { insertToMongo } = require('./insert.js')
+const insertToMongo = require('./insert.js')
+let proxies = new Map()
 
 function cronProps (fastify) {
   return {
@@ -7,9 +8,9 @@ function cronProps (fastify) {
       {
         cronTime: process.env.CRON_TIME,
         onTick: () => {
-          let allPromises = axiosReqs()
+          let allPromises = axiosReqs(proxies)
           Promise.all(allPromises).then(() => {
-            insertToMongo(fastify)
+            insertToMongo(fastify, proxies)
           })
         }
       }

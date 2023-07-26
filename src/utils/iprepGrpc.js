@@ -11,14 +11,17 @@ function grpcInit () {
 }
 
 function addToIpBlacklist (client, ip) {
-  client.SetBlocked({
-    reputations: [
-      {
-        object: ip,
-        type: 'ip'
-      }
-    ]
-  })
+  client.SetBlocked(
+    {
+      reputations: [
+        {
+          object: ip,
+          type: 'ip'
+        }
+      ]
+    },
+    (e, r) => {}
+  )
 }
 
 module.exports = { grpcInit, addToIpBlacklist }

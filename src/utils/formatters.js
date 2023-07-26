@@ -1,12 +1,11 @@
 const { grpcInit, addToIpBlacklist } = require('./iprepGrpc.js')
 let client = grpcInit()
-let myMap = new Map()
 
-function formatProxy (array) {
+function formatProxy (array,proxies) {
   array.forEach(element => {
     if (element.type === 'http') element.type = 'HTTP'
     addToIpBlacklist(client, element.ip)
-    myMap.set(element.ip, {
+    proxies.set(element.ip, {
       _id: element.ip,
       ip: element.ip,
       port: element.port,
@@ -18,11 +17,11 @@ function formatProxy (array) {
   })
 }
 
-function splitProxy (array, type) {
+function splitProxy (array, type,proxies) {
   array.forEach(element => {
     let splitted = element.split(':')
     addToIpBlacklist(client, splitted[0])
-    myMap.set(splitted[0], {
+    proxies.set(splitted[0], {
       _id: splitted[0],
       ip: splitted[0],
       port: splitted[1],
@@ -38,7 +37,7 @@ function formatSocksProxy (array) {
   array.forEach(element => {
     let el = element.split('\t')
     addToIpBlacklist(client, el[0])
-    myMap.set(el[0], {
+    proxies.set(el[0], {
       _id: el[0],
       ip: el[0],
       port: el[1],
@@ -54,7 +53,7 @@ function formatUsSslProxy (array) {
   array.forEach(element => {
     let el = element.split('\t')
     addToIpBlacklist(client, el[0])
-    myMap.set(el[0], {
+    proxies.set(el[0], {
       _id: el[0],
       ip: el[0],
       port: el[1],
@@ -65,8 +64,6 @@ function formatUsSslProxy (array) {
     })
   })
 }
-
-
 
 module.exports = {
   formatProxy,
