@@ -1,5 +1,5 @@
 const axiosReqs = require('../scraps/axios.js')
-const { insertToMongo } = require('./formatters.js')
+const { insertToMongo } = require('./insert.js')
 
 function cronProps (fastify) {
   return {

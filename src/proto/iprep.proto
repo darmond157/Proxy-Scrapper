@@ -60,4 +60,3 @@ message UpdateRepReq2 {
   repeated UpdateReputationModel reps = 3;
 }
 
-

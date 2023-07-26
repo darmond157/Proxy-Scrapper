@@ -1,4 +1,4 @@
 require('dotenv').config()
 const app = require('./src/main')
 
-app(3000, '0.0.0.0')
+app(process.env.PORT, process.env.HOST)

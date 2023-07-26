@@ -1,6 +1,5 @@
-const { grpcInit, addToIpBlacklist } = import('./iprepGrpc.js')
-const client = grpcInit()
-
+const { grpcInit, addToIpBlacklist } = require('./iprepGrpc.js')
+let client = grpcInit()
 let myMap = new Map()
 
 function formatProxy (array) {
@@ -67,30 +66,11 @@ function formatUsSslProxy (array) {
   })
 }
 
-async function insertToMongo (fastify) {
-  if (myMap.size != 0) {
-    await fastify.mongo.db.dropCollection('proxies').catch(() => {
-      console.log('collection does not exist!')
-    })
 
-    await fastify.mongo.db
-      .collection('proxies')
-      .insertMany(Array.from(myMap.values()))
-      .then(() => {
-        console.log('done')
-      })
-      .catch(e => {
-        console.log('Error adding to mongodb: ', e)
-      })
-  } else {
-    console.log('map is empty')
-  }
-}
 
 module.exports = {
   formatProxy,
   splitProxy,
   formatSocksProxy,
-  formatUsSslProxy,
-  insertToMongo
+  formatUsSslProxy
 }

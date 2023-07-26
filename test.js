@@ -1,24 +1,24 @@
-function grpcInit () {
+function init () {
   const grpc = require('@grpc/grpc-js')
   const protoLoader = require('@grpc/proto-loader')
   const packageDef = protoLoader.loadSync('./src/proto/iprep.proto')
   const grpcObj = grpc.loadPackageDefinition(packageDef).iprep
-  const client = new grpcObj.rep(
-    process.env.GRPC_PORT,
-    grpc.credentials.createInsecure()
-  )
-  return client
+  return new grpcObj.rep('localhost:9091', grpc.credentials.createInsecure())
 }
-
-function addToIpBlacklist (client, ip) {
-  client.SetBlocked({
+function block(client,ip){
+client.SetBlocked(
+  {
     reputations: [
       {
         object: ip,
         type: 'ip'
       }
     ]
-  })
+  },
+  (e, r) => {
+    console.log(e)
+    console.log(r)
+  }
+)
 }
-
-module.exports = { grpcInit, addToIpBlacklist }
+let client = init()
